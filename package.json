@@ -1,6 +1,6 @@
 {
   "name": "react-pwa-install-prompt",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A react hook to prompt the install of your PWA in supported browers (Chrome desktop &amp; mobile)",
   "author": "eric-edouard",
   "license": "MIT",
