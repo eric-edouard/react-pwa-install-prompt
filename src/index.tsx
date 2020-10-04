@@ -25,6 +25,7 @@ const usePWA = () => {
 
   React.useEffect(() => {
     const beforeinstallpromptHandler = (e: Event) => {
+      // Prevent install prompt from showing so we can prompt it later
       e.preventDefault()
 
       const promptInstall = async () => {
@@ -51,13 +52,33 @@ const usePWA = () => {
       setTimeout(() => setPwaInfos({ ...pwaInfos, isStandalone: checkStandalone() }), 200)
     }
 
+    const onResize = () => {
+
+      setPwaInfos({
+        ...pwaInfos,
+        isStandalone: checkStandalone()
+      });
+    }
+
+    // Listen on the installation prompt. If this listener is triggered,
+    // it means PWA install is possible.
     window.addEventListener('beforeinstallprompt', beforeinstallpromptHandler)
+
+    // It's also possible to know when the user installed the app by
+    // listening the app installed event
     window.addEventListener('appinstalled', onAppInstalled)
+
+    // On Chrome, when user opens the previous installed app
+    // from the website (via the shortcut in the address bar),
+    // we want to check again if the app is in standalone mode.
+    // We can do this by listening on the resize event
+    window.addEventListener("resize", onResize)
 
     return () => {
       // Cleanup event listeners
       window.removeEventListener('beforeinstallprompt', beforeinstallpromptHandler)
       window.removeEventListener('appinstalled', onAppInstalled)
+      window.removeEventListener("resize", onResize)
     }
   }, [pwaInfos])
 
