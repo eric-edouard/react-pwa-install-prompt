@@ -1,8 +1,6 @@
 import React from 'react'
 import usePWA from 'react-pwa-install-prompt'
 
-import 'react-pwa-install-prompt/dist/index.css'
-
 const App = () => {
   const { isStandalone, isInstallPromptSupported, promptInstall } = usePWA()
 
