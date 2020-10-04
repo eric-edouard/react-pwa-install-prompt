@@ -52,8 +52,7 @@ const usePWA = () => {
       setTimeout(() => setPwaInfos({ ...pwaInfos, isStandalone: checkStandalone() }), 200)
     }
 
-    const onResize = () => {
-
+    const onMatchMedia = () => {
       setPwaInfos({
         ...pwaInfos,
         isStandalone: checkStandalone()
@@ -71,14 +70,13 @@ const usePWA = () => {
     // On Chrome, when user opens the previous installed app
     // from the website (via the shortcut in the address bar),
     // we want to check again if the app is in standalone mode.
-    // We can do this by listening on the resize event
-    window.addEventListener("resize", onResize)
+    window.matchMedia('(display-mode: standalone)').addListener(onMatchMedia)
 
     return () => {
       // Cleanup event listeners
       window.removeEventListener('beforeinstallprompt', beforeinstallpromptHandler)
       window.removeEventListener('appinstalled', onAppInstalled)
-      window.removeEventListener("resize", onResize)
+      window.matchMedia('(display-mode: standalone)').removeEventListener("change", onMatchMedia)
     }
   }, [pwaInfos])
 
