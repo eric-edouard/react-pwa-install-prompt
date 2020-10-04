@@ -29,7 +29,7 @@ const Example = () => {
     return null
   }
 
-  return (<div style={{marginLeft: '2em'}}>
+  return (<div>
     <h2>PWA Infos</h2>
     <p>Is Install Prompt Supported ? {isInstallPromptSupported ? 'true' : 'false'}</p>
     <p>Is Standalone ? {isStandalone ? 'true' : 'false'}</p>
