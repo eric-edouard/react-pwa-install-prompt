@@ -1,10 +1,25 @@
 import React from 'react'
+import usePWA from 'react-pwa-install-prompt'
 
-import { ExampleComponent } from 'react-pwa-install-prompt'
 import 'react-pwa-install-prompt/dist/index.css'
 
 const App = () => {
-  return <ExampleComponent text="Create React Library Example 😄" />
+  const { isStandalone, isInstallPromptSupported, promptInstall } = usePWA()
+
+  const renderInstallButton = () => {
+    if (isInstallPromptSupported && isStandalone)
+      return (
+        <button onClick={promptInstall}>Prompt PWA Install</button>
+      )
+    return null
+  }
+
+  return (<div style={{marginLeft: '2em'}}>
+    <h2>PWA Infos</h2>
+    <p>Is Install Prompt Supported ? {isInstallPromptSupported ? 'true' : 'false'}</p>
+    <p>Is Standalone ? {isStandalone ? 'true' : 'false'}</p>
+    {renderInstallButton()}
+  </div>)
 }
 
 export default App
