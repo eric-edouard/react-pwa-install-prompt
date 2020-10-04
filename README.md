@@ -1,6 +1,6 @@
 # react-pwa-install-prompt
 
-> A react hook to prompt the install of your PWA in supported browers (Chrome desktop &amp; mobile)
+> A react hook to prompt the install of your PWA in supported browsers (Chrome desktop &amp; mobile)
 
 
 
